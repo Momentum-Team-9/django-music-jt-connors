@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<header class="header">
+    <h1>MUSIC</h1>
+</header>
+<br>
+<div class="topnav">
+    <h2>
+    <a href="/">Home</a>
+    <a href="/">Albums</a>
+    
+    </h2>
+</div>
+<div class="albums-add">
+<h2>
+    <a href="{% url 'albums_add' %}"class="button">Add Album</a>
+    <a href="{% url 'albums_edit' pk=album.pk %}" class="button">Edit Album</a>
+    
+</h2>
+</div>
+<br>
+<div class="albums"><h2>Album Details</h2>
+    <br>
+    <ul id= "albums-list">
+        
+        Album Name: {{albums.title}}<br>
+        Artist: {{albums.artist}} </br>
+        {% if albums.release_year %}
+            Released: {{ albums.release_year }}
+        {% endif %}
+        
+        <h2>Tracks</h2>
+        <ul id="track-list">
+        {% for track in albums.tracks.all %}
+            <li>{{tracks.name}}</li>
+        {% endfor %}
+        </ul>
+        <a href="{% url 'albums_edit' pk=albums.pk%}" class="button">Edit Album</a>
+        <a href="{% url 'albums_delete' pk=albums.pk%}" class="button">Delete Album</a>
+        
+    </ul>    
+</div>
+
+{% endblock %}
